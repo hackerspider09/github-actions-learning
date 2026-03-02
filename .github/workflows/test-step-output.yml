@@ -1,7 +1,7 @@
 name: Test step outputs
 
 on:
-  workflow-dispatch
+  workflow_dispatch
 
 jobs:
   step-output:
