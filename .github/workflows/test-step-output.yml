@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Generate number/output
         id: generate
-        run: echo "number=$RANDOM" >> GITHUB_OUTPUT
+        run: echo "number=$RANDOM" >> $GITHUB_OUTPUT
       
       - name: print output
         run: echo "Numbe is ${{ steps.generate.outputs.number  }}" 
