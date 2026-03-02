@@ -10,4 +10,10 @@ jobs:
     steps:
       - name: print working dir
         run: pwd
+
+      - name: print user
+        run: whoami
+
+      - name: print os
+        run: cat /etc/os-release
       
