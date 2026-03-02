@@ -25,5 +25,5 @@ jobs:
       - name: Global, Job env override by Step env
         env:
           NAME: Step
-        run: echo "$NAME:
+        run: echo "$NAME"
 
