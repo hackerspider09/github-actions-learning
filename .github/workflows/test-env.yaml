@@ -1,0 +1,29 @@
+name: Test ENV variables
+
+on:
+  workflow_dispatch
+
+env:
+  NAME: Global
+
+jobs:
+  glob-env:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: No Override
+        run: echo "$NAME"
+  
+  job-env:
+    runs-on: ubuntu-latest
+    env:
+      NAME: Job
+    steps:
+      - name: Global env override by Job env
+        run: echo "$NAME"
+      
+      - name: Global, Job env override by Step env
+        env:
+          NAME: Step
+        run: echo "$NAME:
+
