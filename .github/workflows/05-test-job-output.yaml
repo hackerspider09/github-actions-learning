@@ -1,4 +1,4 @@
-name: Test job output
+name: 04 Test job output
 
 on:
   workflow_dispatch

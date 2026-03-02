@@ -1,4 +1,4 @@
-name: Test workspace dir for github actions
+name: 01 Test workspace dir for github actions
 
 on: 
   workflow_dispatch:

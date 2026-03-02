@@ -1,4 +1,4 @@
-name: Test ENV variables
+name: 02 Test ENV variables
 
 on:
   workflow_dispatch

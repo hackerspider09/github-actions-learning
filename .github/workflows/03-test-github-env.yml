@@ -1,4 +1,4 @@
-name: test GITHUB_ENV
+name: 03 test GITHUB_ENV
 
 on:
   workflow_dispatch

@@ -1,4 +1,4 @@
-name: Test step outputs
+name: 04 Test step outputs
 
 on:
   workflow_dispatch
