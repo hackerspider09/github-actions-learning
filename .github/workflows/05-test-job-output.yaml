@@ -22,5 +22,3 @@ jobs:
         if: needs.job1.outputs.build == 'true'
         run: echo "Deployment allowed"
 
-      - name: debug step
-        run: echo  ${{needs.job1.outputs}}
