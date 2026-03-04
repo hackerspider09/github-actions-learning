@@ -23,7 +23,7 @@ jobs:
         run: echo "Deployment allowed"
 
       - name: debug step 1
-        run: echo "${{ needs }}"
+        run: echo "${{ toJson(needs) }}"
       - name: debug step 2
-        run: echo "${{ job }}"
+        run: echo "${{ toJson(job) }}"
 
