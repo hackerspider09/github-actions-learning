@@ -28,8 +28,9 @@ jobs:
     steps:
       - name: failing step
         run: exit 1
+        id: failstep
         continue-on-error: true
-
+        
       - name: Run if failed
         if: failure()
         run: echo "Previous step failed"
@@ -37,6 +38,11 @@ jobs:
       - name: failing step 2
         run: exit 1
         continue-on-error: true
+
+      - name: check actual output and conclusion
+        run: |
+          echo "${{ steps.failstep.outcome }} ${{ steps.failstep.conclusion }}"
+          echo "${{steps}}"
 
       - name: check next step after after
         run: echo "${{toJson(job)}}"
