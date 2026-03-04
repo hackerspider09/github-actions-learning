@@ -1,6 +1,14 @@
 name: 09 Test needs and if
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: should deploy 
+        type: boolean
+        default: true
+
+
 
 jobs:
   job1:
@@ -11,7 +19,7 @@ jobs:
     steps:
       - name: should deploy server  
         id: server_flag
-        run: echo "deploy=true" >> $GITHUB_OUTPUT
+        run: echo "deploy=${{inputs.deploy}}" >> $GITHUB_OUTPUT
 
   job2:
     runs-on: ubuntu-latest
