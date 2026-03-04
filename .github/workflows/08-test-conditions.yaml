@@ -41,8 +41,8 @@ jobs:
 
       - name: check actual output and conclusion
         run: |
-          echo "${{ steps.failstep.outcome }} ${{ steps.failstep.conclusion }}"
-          echo "${{steps}}"
+          echo "${{ steps.failstep.outcome }} | ${{ steps.failstep.conclusion }}"
+          echo "${{toJson(steps)}}"
 
       - name: check next step after after
         run: echo "${{toJson(job)}}"
