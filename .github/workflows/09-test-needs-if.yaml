@@ -1,0 +1,30 @@
+name: 09 Test needs and if
+
+on: workflow_dispatch
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      should_deploy: ${{ steps.server_flag.outputs.deploy }}
+
+    steps:
+      - name: should deploy server  
+        id: server_flag
+        run: echo "deploy=true" >> $GITHUB_OUTPUT
+
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    if: needs.job1.outputs.should_deploy == 'true'
+
+    steps:
+      - run: echo "Job2 executed"
+
+  job3:
+    runs-on: ubuntu-latest
+    needs: job1
+    if: needs.job1.outputs.should_deploy == 'false'
+
+    steps:
+      - run: echo "Job3 executed"
