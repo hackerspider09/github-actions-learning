@@ -1,4 +1,4 @@
-name: Test contexts
+name: 07 Test contexts
 
 on:
   workflow_dispatch
@@ -16,4 +16,8 @@ jobs:
 
       - name: print Job context
         run: echo "${{ toJson(job) }}"
+
+      - name: print Steps context
+        run: echo "${{ toJson(steps) }}"
+        
         
