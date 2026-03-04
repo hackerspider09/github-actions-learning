@@ -1,0 +1,60 @@
+name: 08 Test conditions
+
+on: 
+  workflow_dispatch
+
+jobs:
+  main-branch:
+    runs-on: 
+      - ubuntu-latest
+
+    steps:
+      - name: run on main
+        if: ${{github.ref == 'refs/heads/main'}}
+        run: echo "This will only run on main branch"
+  
+  failed-job:
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - name: failing step
+        run: exit 1
+      - name: check status
+        run: echo "${{toJson(job)}}"
+      
+  failed-continue-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: failing step
+        run: exit 1
+        continue-on-error: true
+
+      - name: Run if failed
+        if: failure()
+        run: echo "Previous step failed"
+
+      - name: failing step 2
+        run: exit 1
+        continue-on-error: true
+
+      - name: check next step after after
+        run: echo "${{toJson(job)}}"
+
+  always-run:
+    
+    runs-on: ubuntu-latest
+    steps:
+      - name: failing step
+        run: exit 1
+
+      - name: Always run
+        if: always()
+        run: echo "This always runs"
+      
+      - name: check status
+        run: echo "${{toJson(job)}}"
+
+      
+
+
