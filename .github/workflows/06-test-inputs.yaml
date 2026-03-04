@@ -1,0 +1,32 @@
+name: 06 Test Inputs
+
+on:
+  workflow_dispatch:
+    inputs:
+      username: 
+        required: true
+        type: string
+
+      environment:
+        required: true
+        type: choice
+        options:
+          - prod
+          - dev
+          - test
+      
+      deploy:
+        required: false
+        type: boolean
+
+jobs:
+  inputs-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: print all inputs
+        run: | 
+          echo "${{inputs.username}}"
+          echo "${{inputs.environment}}"
+          echo "${{inputs.deploy}}"
+        
