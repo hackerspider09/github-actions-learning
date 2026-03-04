@@ -1,0 +1,15 @@
+name: 10 Test summary
+
+on: workflow_dispatch
+
+jobs:
+  test-summary:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: summary dashboard
+        run: |
+          echo "## Workflow Report =>" >> $GITHUB_STEP_SUMMARY
+          echo "Actor: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "Repository: ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+          echo "Run Number: ${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
