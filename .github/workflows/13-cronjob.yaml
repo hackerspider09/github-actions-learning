@@ -1,0 +1,14 @@
+name: 13 Cron Job Workflow
+
+on:
+  schedule:
+    - cron: '* * * * *'
+
+
+jobs:
+  cronjob-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: check time
+        run: echo "current time => $(date)"
