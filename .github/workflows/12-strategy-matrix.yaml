@@ -1,4 +1,4 @@
-name: Strategy Matrix Workflow
+name: 12 Strategy Matrix Workflow
 
 on:
   workflow_dispatch:
@@ -23,9 +23,28 @@ jobs:
         run: echo "this will run for all python versions"
       - name: check python version
         run: echo "running python version => ${{matrix.python-version}}"
-      
-  exclude-test:
+
+
+
+# total combinations for exclude exmaple:
+# 3.8 / 1.0
+# 3.8 / 2.0
+# 3.9 / 1.0
+# 3.9 / 2.0
+# 3.10 / 1.0
+# 3.10 / 2.0
+
+  exclude-single-test:
   # This is to test exclude in matrix strategy and it will run for all python versions except 3.9 and node version 2.0
+  # removed:
+  # 3.9 / 1.0
+  # 3.9 / 2.0
+  # 3.8 / 2.0
+  # 3.10 / 2.0
+  # Remaining:
+  # 3.8 / 1.0
+  # 3.10 / 1.0
+
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -34,6 +53,29 @@ jobs:
         exclude:
           - python-version: 3.9
           - node-version: 2.0
+    
+    steps:
+      - name: check python version
+        run: echo "python version => ${{matrix.python-version}} and node version => ${{matrix.node-version}}"
+
+
+  exclude-combination-test:
+  # This is to test exclude combinations 
+  # Remaining
+  # 3.8 / 1.0
+  # 3.8 / 2.0
+  # 3.9 / 1.0
+  # 3.10 / 1.0
+  # 3.10 / 2.0
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, 3.10]
+        node-version: [1.0, 2.0]
+        exclude:
+          - python-version: 3.9
+            node-version: 2.0
 
     steps:
       - name: check python version
@@ -54,6 +96,14 @@ jobs:
   
   fail-fast-witherror-test:
   # This is to test fail-fast in matrix strategy and it will run for all python versions and node versions but if any of the job fails then it will stop the execution of other jobs in matrix
+    # total combinations:
+    # 3.8 / 1.0
+    # 3.8 / 2.0
+    # 3.9 / 1.0
+    # 3.9 / 2.0
+    # 3.10 / 1.0
+    # 3.10 / 2.0
+
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -64,8 +114,8 @@ jobs:
     steps:
       - name: check python version
         run: |
-          if [[ ${{matrix.python-version}} == '3.9' ]]; then
-            echo "This is python 3.9 and it will fail the job"
+          if [[ ${{matrix.python-version}} == '3.9' && ${{matrix.node-version}} == '2.0' ]]; then
+            echo "This is python 3.9 and node 2.0 and it will fail the job"
             exit 1
           else
             echo "python version => ${{matrix.python-version}} and node version => ${{matrix.node-version}}"
