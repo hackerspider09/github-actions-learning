@@ -114,7 +114,7 @@ jobs:
     steps:
       - name: check python version
         run: |
-          if [[ ${{matrix.python-version}} -eq 3.9 && ${{matrix.node-version}} -eq 2.0 ]]; then
+          if [[ ${{matrix.python-version}} == '3.9' && ${{matrix.node-version}} == '2.0' ]]; then
             echo "This is python 3.9 and node 2.0 and it will fail the job"
             exit 1
           else
