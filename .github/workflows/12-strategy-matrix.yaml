@@ -1,4 +1,5 @@
 name: 12 Strategy Matrix Workflow
+# in matrix strategy as per matrix each job is created for that and all run parallel   
 
 on:
   workflow_dispatch:
