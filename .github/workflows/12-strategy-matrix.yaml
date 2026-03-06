@@ -9,7 +9,7 @@ on:
         - main
       types:
         - opened
-        - updated
+        - synchronize
 # I have converted int value in matric 3.8 to '3.8' as in github actions its changing decimal .0 to int like 2.0 -> 2
 jobs:
   matrix-test:
