@@ -9,14 +9,14 @@ on:
       types:
         - opened
         - updated
-
+# I have converted int value in matric 3.8 to '3.8' as in github actions its changing decimal .0 to int like 2.0 -> 2
 jobs:
   matrix-test:
   # This is to test matrix strategy and it will run for all python versions mentioned in matrix
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10]
+        python-version: ['3.8', '3.9', '3.10']
 
     steps:
       - name: debug line
@@ -48,8 +48,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10]
-        node-version: [1.0, 2.0]
+        python-version: ['3.8', '3.9', '3.10']
+        node-version: ['1.0', '2.0']
         exclude:
           - python-version: 3.9
           - node-version: 2.0
@@ -71,8 +71,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10]
-        node-version: [1.0, 2.0]
+        python-version: ['3.8', '3.9', '3.10']
+        node-version: ['1.0', '2.0']
         exclude:
           - python-version: 3.9
             node-version: 2.0
@@ -86,8 +86,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10]
-        node-version: [1.0, 2.0]
+        python-version: ['3.8', '3.9', '3.10']
+        node-version: ['1.0', '2.0']
       fail-fast: true
 
     steps:
@@ -107,8 +107,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10]
-        node-version: [1.0, 2.0]
+        python-version: ['3.8', '3.9', '3.10']
+        node-version: ['1.0', '2.0']
       fail-fast: true
 
     steps:
