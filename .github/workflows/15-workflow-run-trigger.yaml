@@ -1,5 +1,6 @@
 name: 15 Workflow run trigger
-#  This workflow demonstate trigger workflow from other workflows status like if its failed ot success
+#  This workflow demonstate trigger workflow from other workflows lifecycle like completed, requested, inprogress
+# by github context we can see result of previous workflow and can take action accordingly
 
 on:
   workflow_run:
@@ -14,3 +15,11 @@ jobs:
     steps:
       - name: print message
         run: echo "Workflow triggered by event => ${{ toJson(github.event) }} "
+
+      - name: run on success
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        run: echo "Previous workflow succeeded"
+
+      - name: run on failure
+        if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+        run: echo "Previous workflow failed"
