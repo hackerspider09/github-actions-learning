@@ -19,6 +19,7 @@ jobs:
       job1
     steps:
       - name: if build done deploy
+      # why needs.job is used why not directly job beacuse jobs run in parallel ydefault but to get output we need them to run after the job1 so we need to use needs keyword to make sure job2 runs after job1 and also to get the output of job1 we need to use needs.job1.outputs.build
         if: needs.job1.outputs.build == 'true'
         run: echo "Deployment allowed"
 

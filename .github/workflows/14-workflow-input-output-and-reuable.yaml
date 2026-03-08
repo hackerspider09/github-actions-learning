@@ -1,0 +1,25 @@
+name: Workflow with input and output parameters
+# Thiw workflow use to test input and output param in workflow and its use
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Enter your name"
+        required: true
+        type: string
+        default: "ubuntu"
+
+jobs:
+  call-sub-workflow:
+    uses: ./.github/workflows/14.1-sub-workflow.yaml
+    with:
+      name: ${{inputs.name}}
+  
+  print-greeting:
+    runs-on: ubuntu-latest
+    needs: call-sub-workflow
+
+    steps:
+      - name: print greeting 
+        run: echo "Greet Message=> ${{ needs.call-sub-workflow.outputs.greeting }}"

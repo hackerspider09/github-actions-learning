@@ -1,0 +1,24 @@
+name: Reusable workflow used in 14th workflow (Greeting workflow)
+
+on:
+  workflow_call:
+    inputs:
+      name:
+        required: true
+        type: string
+
+    outputs:
+      greeting:
+        description: "A greeting message"
+        value: ${{ steps.greet.outputs.message }}
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: generate message
+        id: greet
+        run: echo "message=Hellow ${{inputs.name}}" >> $GITHUB_OUTPUT
+
+
