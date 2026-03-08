@@ -13,7 +13,7 @@ jobs:
         run: echo "number=$RANDOM" >> $GITHUB_OUTPUT
       
       - name: print output
-        run: echo "${{ steps.generate.outputs.RANDOM }}" 
+        run: echo "${{ steps.generate.outputs.number }}" 
       
       - name: print steps 
         run: echo "${{ toJson(steps)  }}" 
