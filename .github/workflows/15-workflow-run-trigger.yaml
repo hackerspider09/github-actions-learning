@@ -5,8 +5,7 @@ on:
   workflow_run:
     workflows: ["15.1 sub workflow"]
     types:
-      - success
-      - failure
+      - completed
 
 jobs:
   workflow-run-trigger:

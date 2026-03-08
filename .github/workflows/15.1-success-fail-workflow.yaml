@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: create output
         run: |
-          if [ "${{inputs.flag}}" == "true"]; then
+          if [[ "${{inputs.flag}}" == "true" ]]; then
             exit 0
           else
             exit 1
