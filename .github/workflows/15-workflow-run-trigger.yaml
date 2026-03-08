@@ -1,0 +1,17 @@
+name: 15 Workflow run trigger
+#  This workflow demonstate trigger workflow from other workflows status like if its failed ot success
+
+on:
+  workflow_run:
+    workflows: ["15.1 sub workflow"]
+    types:
+      - success
+      - failure
+
+jobs:
+  workflow-run-trigger:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: print message
+        run: echo "Workflow triggered by event => ${{ toJson(github.event) }} "

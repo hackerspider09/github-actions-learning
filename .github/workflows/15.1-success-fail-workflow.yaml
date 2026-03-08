@@ -1,0 +1,23 @@
+name: 15.1 sub workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      flag:
+        description: "Enter true or false"
+        required: true
+        type: boolean
+
+jobs:
+  sub-workflow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: create output
+        run: |
+          if [ "${{inputs.flag}}" == "true"]; then
+            exit 0
+          else
+            exit 1
+          fi      
+    

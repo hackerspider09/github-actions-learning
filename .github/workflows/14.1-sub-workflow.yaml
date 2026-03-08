@@ -1,4 +1,4 @@
-name: Reusable workflow used in 14th workflow (Greeting workflow)
+name: 14.1 Reusable workflow used in 14th workflow (Greeting workflow)
 
 on:
   workflow_call:
