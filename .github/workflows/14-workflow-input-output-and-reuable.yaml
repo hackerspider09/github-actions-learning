@@ -1,6 +1,7 @@
 name: 14 Workflow with input and output parameters
 # Thiw workflow use to test input and output param in workflow and its use
-
+# resuable workflow called directly in job we can also call in steps
+ 
 on:
   workflow_dispatch:
     inputs:
