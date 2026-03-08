@@ -10,12 +10,14 @@ on:
     outputs:
       greeting:
         description: "A greeting message"
-        value: ${{ steps.greet.outputs.message }}
+        value: ${{ jobs.greeting.outputs.message }}
 
 jobs:
   greeting:
     runs-on: ubuntu-latest
 
+    outputs:
+      message: ${{ steps.greet.outputs.message }}
     steps:
       - name: generate message
         id: greet
