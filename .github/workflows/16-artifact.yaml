@@ -35,3 +35,19 @@ jobs:
 
       - name: Check artifact
         run: cat "${{github.workspace}}/greet.txt"
+
+  consumer-spec-dir:
+    runs-on: ubuntu-latest
+    needs: 
+      - producer
+
+    steps:
+
+      - name: Get artifact in tmp dir
+        uses: actions/download-artifact@v5
+        with:
+          name: greet-file
+          path: /tmp
+
+      - name: Check artifact
+        run: cat "/tmp/greet.txt"
