@@ -1,0 +1,35 @@
+name: Artifact share between jobs
+
+on:
+  workflow_dispatch: 
+
+
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create file
+        run: echo "Hello prasad" >> /tmp/greet.txt
+
+
+      - name: Store artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: greet-file
+          path: /tmp/greet.txt
+
+  consumer-workspace:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check workspace
+        run: echo "${{github.workspace}}"
+
+      - name: Get artifact in crnt workspace
+        uses: actions/download-artifact@v5
+        with:
+          name: greet-file
+
+      - name: Check artifact
+        run: cat "${{github.workspace}}/greet.txt"
