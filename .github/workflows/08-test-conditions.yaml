@@ -33,7 +33,10 @@ jobs:
         
       - name: Run if failed
         if: failure()
-        run: echo "Previous step failed"
+        run: |
+          echo "Previous step failed"
+          echo "${{ steps.failstep.outcome }} | ${{ steps.failstep.conclusion }}"
+          echo "${{toJson(steps)}}"
 
       - name: failing step 2
         run: exit 1
