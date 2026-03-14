@@ -1,29 +1,103 @@
-name: 17 Test failure() in step and job 
+name: 17 Test failure() in step and job
 
-on: 
+on:
   workflow_dispatch:
-    
+
 jobs:
+
+  # ----------------------------------------------------------
+  # CASE 1 — failure() inside steps of SAME JOB
+  # ----------------------------------------------------------
   step-failure:
     runs-on: ubuntu-latest
     steps:
+
+      # This step intentionally fails
       - name: Build
         id: build
-        run: exit 1 # Simulate failure
+        run: exit 1   # exit 1 -> step fails -> job becomes failed
 
+      # failure() checks JOB status
+      # Since the previous step failed and there is no continue-on-error,
+      # the job is now in failure state.
+      # Therefore failure() = true and this step runs.
       - name: Notify on failure
         if: failure()
         run: echo "The build failed!"
 
-  # Test failure in job
+
+  # ----------------------------------------------------------
+  # CASE 2 — failure() between JOBS
+  # ----------------------------------------------------------
+
+  # This job fails intentionally
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: exit 1 # Fail
-  
+      - run: exit 1   # Job status becomes FAILED
+
+
+  # This job depends on 'test'
   notify:
     needs: test
+
+    # failure() here checks the result of previous jobs
+    # If any required job failed (test job), this evaluates to true.
     if: failure()
+
     runs-on: ubuntu-latest
     steps:
       - run: echo "Test job failed!"
+
+
+    # ----------------------------------------------------------
+  # CASE 3 — Step fails but continue-on-error is enabled
+  # ----------------------------------------------------------
+
+  failed-continue-job:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # Step fails but continue-on-error allows the job to continue
+      - name: failing step
+        run: exit 1
+        id: failstep
+        continue-on-error: true
+
+        # Important behaviour:
+        # outcome    = failure (actual result)
+        # conclusion = success (because error is ignored)
+        # job.status = success
+
+
+      # failure() checks JOB STATUS
+      # Since continue-on-error prevented job failure,
+      # the job is still considered SUCCESS.
+      # Therefore failure() = false and this step WILL NOT RUN.
+      - name: Run if failed
+        if: failure()
+        run: |
+          echo "Previous step failed"
+          echo "${{ steps.failstep.outcome }} | ${{ steps.failstep.conclusion }}"
+          echo "${{toJson(steps)}}"
+
+
+      # Another failing step with continue-on-error
+      - name: failing step 2
+        run: exit 1
+        continue-on-error: true
+
+
+      # This step runs because previous failures were ignored
+      - name: check actual output and conclusion
+        run: |
+          # outcome shows real result
+          # conclusion shows result after continue-on-error
+          echo "${{ steps.failstep.outcome }} | ${{ steps.failstep.conclusion }}"
+          echo "${{toJson(steps)}}"
+
+
+      # Shows overall job information
+      - name: check next step after after
+        run: echo "${{toJson(job)}}"
