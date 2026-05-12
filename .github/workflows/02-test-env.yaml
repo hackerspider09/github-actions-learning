@@ -1,6 +1,6 @@
 name: 02 Test ENV variables
 # Env work with shell and other calling
-# in shell: #envname
+# in shell: $envname
 # in other use: ${{env.envname}}
 on:
   workflow_dispatch
