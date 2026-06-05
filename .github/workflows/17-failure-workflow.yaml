@@ -6,7 +6,7 @@ on:
 jobs:
 
   # ----------------------------------------------------------
-  # CASE 1 — failure() inside steps of SAME JOB
+  # CASE 1 - failure() inside steps of SAME JOB
   # ----------------------------------------------------------
   step-failure:
     runs-on: ubuntu-latest
@@ -27,7 +27,7 @@ jobs:
 
 
   # ----------------------------------------------------------
-  # CASE 2 — failure() between JOBS
+  # CASE 2 - failure() between JOBS
   # ----------------------------------------------------------
 
   # This job fails intentionally
@@ -51,7 +51,7 @@ jobs:
 
 
     # ----------------------------------------------------------
-  # CASE 3 — Step fails but continue-on-error is enabled
+  # CASE 3 - Step fails but continue-on-error is enabled
   # ----------------------------------------------------------
 
   failed-continue-job:
