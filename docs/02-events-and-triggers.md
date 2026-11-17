@@ -35,7 +35,7 @@ on:
   push:
     branches:
       - main
-      - 'release/**'       # Matches release/1.0, release/2.0, etc.
+      - 'release/**'       # Matches release/1.0, release/v1/1.0, release/2.0, etc.
       - 'hotfix/*'         # Matches hotfix/login but NOT hotfix/auth/token
 ```
 
